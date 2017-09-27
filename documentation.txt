@@ -1,0 +1,101 @@
+1) Clone the business directory from the bitbucket website into your workspace;
+	Run this command
+	>> git clone https://Miravicson@bitbucket.org/Miravicson/business_directory.git
+
+2) Change your directory into the directory you just cloned from the bitbucket account
+
+	Run this command
+	>> cd business_directory
+3) Create your django project in the same directory, the name of this django project should be business_directory
+
+	Run this command
+	>> django-admin startproject business_directory . (note the fullstop at the end is necessary so that the 
+	file dependencies will not be created inside a sub-folder but rather on the cloned business_directory folder)
+
+4) Create a requirements.txt file the requirements.txt file specifies the
+   dependecies that your project runs on.
+	Run this command
+	>> touch requirements.txt
+5) Populate the requirements.txt file with the following default dependencies
+	<dj-database-url==0.4.1>
+	<Django==1.11.1>
+	<gunicorn==19.6.0>
+	<psycopg2==2.6.2>
+	<whitenoise==3.2> 
+   (The "<" and ">" are not added to the requirements.txt file)
+
+6) Create a runtime.txt file. This file specifies the python version
+   That will be used at runtime
+
+	Run this command:
+	>> touch runtime.txt
+	edit the runtime file and add
+	<python-3.6.2>
+
+	(Note again, the "<" and ">" are not typed into the runtime.txt)
+
+7) Create a Procfile (note this file does not have any extension)
+	Run this command:
+	>> touch Procfile (This creates the Procfile)
+	Run this command to edit the Procfile
+	>> nano Procfile
+	add this to the Procfile
+	<web: gunicorn business_directory.wsgi ("business_directory" is the name of the project)
+8) Create a templates directory;
+	Run this command:
+	>> mkdir templates
+9) Create a static directory;
+	Run this command:
+	>> mkdir static
+
+10) Open The settings.py file in the inner /business_directory folder and create some variables
+
+    <TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")>
+    <STATIC_DIR = os.path.join(BASE_DIR, "static")>
+
+
+11) Locate the section of the settings.py file that has a list called
+        TEMPLATES = [
+
+            ...
+            {
+                'DIRS': [(X)]
+            }
+        ]
+    add TEMPLATE_DIR at the point (X). so it becomes 'DIRS': [TEMPLATE_DIR,]
+    the list 'DIRS': [] is essentially a list containing file paths for templates used in the project
+
+12) Create a variable called STATICFILES_DIRS. This is a list of path where django can find staticfiles
+
+    assign this variable to a list containing STATIC_DIR
+    <STATICFILES_DIR = [STATIC_DIR, ]>
+
+13) Now it is time to install the packages in the install the dependencies in the requirements.txt
+    open the requirements.txt and comment out the psycopg2==2.6.2 by putting a '#' sign in front of it
+    we will need this after installing postgre database, it will not run without the postgre database
+
+14) Save the requirements.txt and run the following command. Note it is assumed that you have not deactivated your virtualenvironment, these packages needs to be ran in a virtualenvironment
+    Run the following command
+       >> pip install -r requirements.txt
+
+   This commands installs all the dependencies in the requirements.txt file except the psycopg2==2.6.2 which we will install later after installing postgre database
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
